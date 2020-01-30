@@ -8,7 +8,13 @@ def _get_pokeapi_pokemon(name: str) -> dict:
 
 
 def get_pokemon(name: str) -> dict:
-    raise NotImplementedError
+    pokeapi_dict = _get_pokeapi_pokemon(name)
+    flavor_texts = pokeapi_dict["flavor_text_entries"]
+    selected_flavor_text = flavor_texts[1]
+    return {
+        "name": name,
+        "description": selected_flavor_text["flavor_text"],
+    }
 
 
 def _get_funtranslations_shakespearean(text: str) -> str:
@@ -16,8 +22,11 @@ def _get_funtranslations_shakespearean(text: str) -> str:
 
 
 def translate_text(text: str) -> str:
-    raise NotImplementedError
+    no_newlines = text.replace("\n", " ")
+    return _get_funtranslations_shakespearean(no_newlines)
 
 
 def shakespearean_pokemon(name: str) -> dict:
-    raise NotImplementedError
+    pokemon = get_pokemon(name)
+    pokemon["description"] = translate_text(pokemon["description"])
+    return pokemon
