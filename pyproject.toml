@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "pokemon_shakespeare"
+version = "0.1.0"
+description = "An API for retrieving Pokemon descriptions in Shakespearean English"
+authors = ["Karl Birch <mbwkarl@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.47.1"
+requests = "^2.22.0"
+uvicorn = "^0.11.2"
+redis = "^3.3.11"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^3.7.9"
+black = "^19.10b0"
+mypy = "^0.761"
+
+[build-system]
+requires = ["poetry==1.0.2"]
+build-backend = "poetry.masonry.api"

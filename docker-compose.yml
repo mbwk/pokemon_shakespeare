@@ -1,0 +1,18 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/code
+  redis:
+    image: "redis:5.0-alpine"
+    volumes:
+      - "redis:/data"
+    ports:
+      - "6379:6379"
+
+volumes:
+  redis:

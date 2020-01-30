@@ -1,0 +1,12 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+.mypy_cache
+.pytest_cache
+env
+bin
+Dockerfile
+docker-compose.yml
