@@ -1,8 +1,7 @@
+import redis
+
 from pokemon_shakespeare.exceptions import CacheError
 from pokemon_shakespeare.settings import getconfig
-
-
-import redis
 
 
 def get_storage() -> redis.Redis:

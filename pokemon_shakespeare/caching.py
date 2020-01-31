@@ -4,7 +4,6 @@ from typing import (
     Optional,
 )
 
-
 from pokemon_shakespeare.persistence import get_storage
 
 

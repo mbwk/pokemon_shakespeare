@@ -1,10 +1,10 @@
+from fastapi import FastAPI, HTTPException
+
 from pokemon_shakespeare.exceptions import (
     PokemonNotFoundError,
     RatelimitedError,
 )
 from pokemon_shakespeare.service import shakespearean_pokemon
-
-from fastapi import FastAPI, HTTPException
 
 
 app = FastAPI()

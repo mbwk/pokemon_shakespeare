@@ -1,14 +1,12 @@
 from urllib.parse import urljoin
 
+import requests
 
 from pokemon_shakespeare.caching import cache_translation
 from pokemon_shakespeare.exceptions import (
     PokemonNotFoundError,
     RatelimitedError,
 )
-
-
-import requests
 
 
 POKEAPI_BASE = "https://pokeapi.co/api/v2/"
