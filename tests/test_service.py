@@ -1,19 +1,13 @@
-import json
 from unittest import mock
 
 from pokemon_shakespeare.service import (
     get_pokemon,
     shakespearean_pokemon,
 )
-
-
-with open("samples/charizard.json") as f:
-    DUMMY_CHARIZARD_JSON = json.loads(str(f.read()))
-
-DUMMY_SHAKESPEARE_DESC = (
-    "Charizard flies 'round the sky in search of powerful opponents. 't "
-    "breathes fire of such most wondrous heat yond 't melts aught. However, "
-    "'t nev'r turns its fiery breath on any opponent weaker than itself."
+from tests.resources import (
+    DUMMY_CHARIZARD_JSON,
+    DUMMY_SHAKESPEARE_DESC,
+    DUMMY_SHAKESPEARE_JSON,
 )
 
 
@@ -34,7 +28,7 @@ def test_get_pokemon(mock_get):
 @mock.patch("pokemon_shakespeare.service._get_pokeapi_pokemon")
 def test_shakespearean_pokemon(mock_pokemon, mock_funtranslate):
     mock_pokemon.return_value = DUMMY_CHARIZARD_JSON
-    mock_funtranslate.return_value = DUMMY_SHAKESPEARE_DESC
+    mock_funtranslate.return_value = DUMMY_SHAKESPEARE_JSON
 
     translated_pokemon = shakespearean_pokemon("charizard")
     assert translated_pokemon["name"] == "charizard"
