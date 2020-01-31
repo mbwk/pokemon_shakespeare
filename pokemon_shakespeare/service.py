@@ -55,3 +55,7 @@ def shakespearean_pokemon(name: str) -> dict:
     pokemon = get_pokemon(name)
     pokemon["description"] = translate_text(pokemon["description"])
     return pokemon
+
+
+def normalize_pokemon_name(name: str) -> str:
+    return name.lower()

@@ -4,7 +4,10 @@ from pokemon_shakespeare.exceptions import (
     PokemonNotFoundError,
     RatelimitedError,
 )
-from pokemon_shakespeare.service import shakespearean_pokemon
+from pokemon_shakespeare.service import (
+    shakespearean_pokemon,
+    normalize_pokemon_name,
+)
 
 
 app = FastAPI()
@@ -18,7 +21,7 @@ def read_root() -> str:
 @app.get("/pokemon/{pokemon}")
 def read_pokemon(pokemon: str) -> dict:
     try:
-        return shakespearean_pokemon(pokemon)
+        return shakespearean_pokemon(normalize_pokemon_name(pokemon))
     except PokemonNotFoundError:
         raise HTTPException(404, detail="Pokemon not found.")
     except RatelimitedError:
