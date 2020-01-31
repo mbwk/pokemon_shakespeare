@@ -11,6 +11,7 @@ This app is built from the following:
 - FastAPI (with uvicorn)
 - Redis (with redis-py)
 - requests
+- poetry
 
 
 The core web application itself is stateless, but due to the low ratelimit
@@ -60,16 +61,12 @@ can quickly be adapted for other platforms.
 
   a. Orchestration with docker-compose (recommended)
   
-    ```
     $ docker-compose up
-    ```
 
   b. Standalone (not recommended, runs without Redis)
 
-    ```
     # Running this script by itself will spin up a container running the application
     $ bin/runserver.sh
-    ```
 
 
 ## Usage
@@ -121,3 +118,11 @@ The `bin/` scripts can be used to perform development tasks.
   $ bin/dockerize.sh poetry show
   $ bin/dockerize.sh python
   ```
+
+
+## Misc Notes
+
+While a small change would allow the web app to run without relying on a
+running Redis instance, I decided against it: preferring to crash rather
+than accidentally using up the small usage quota of the Shakespearean
+translation API. Redis is a hard requirement.
