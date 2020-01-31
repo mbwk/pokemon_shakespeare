@@ -1,5 +1,7 @@
+import unittest
 from unittest import mock
 
+from pokemon_shakespeare.exceptions import RatelimitedError
 from pokemon_shakespeare.service import (
     get_pokemon,
     shakespearean_pokemon,
@@ -33,3 +35,14 @@ def test_shakespearean_pokemon(mock_pokemon, mock_funtranslate):
     translated_pokemon = shakespearean_pokemon("charizard")
     assert translated_pokemon["name"] == "charizard"
     assert translated_pokemon["description"] == DUMMY_SHAKESPEARE_DESC
+
+
+class RatelimitingTestCase(unittest.TestCase):
+    @mock.patch("pokemon_shakespeare.service._get_funtranslations_shakespearean")
+    @mock.patch("pokemon_shakespeare.service._get_pokeapi_pokemon")
+    def test_ratelimited_on_translation(self, mock_pokemon, mock_funtranslate):
+        mock_pokemon.return_value = DUMMY_CHARIZARD_JSON
+        mock_funtranslate.side_effect = RatelimitedError
+
+        with self.assertRaises(RatelimitedError):
+            shakespearean_pokemon("charizard")
