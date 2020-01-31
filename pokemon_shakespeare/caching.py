@@ -1,15 +1,27 @@
 from typing import (
     Callable,
     Dict,
+    Optional,
 )
 
 
-def _get_from_cache(name: str) -> str:
-    raise NotImplementedError
+from pokemon_shakespeare.persistence import get_storage
+
+
+def _get_from_cache(name: str) -> Optional[str]:
+    r = get_storage()
+    value = r.get(name)
+    return value.decode("utf8") if value else None
 
 
 def _set_in_cache(name: str, description: str):
-    raise NotImplementedError
+    r = get_storage()
+    r.set(name, description)
+
+
+def get_available_translations():
+    r = get_storage()
+    return [name.decode("utf8") for name in r.keys()]
 
 
 def cache_translation(
@@ -22,6 +34,7 @@ def cache_translation(
                 "name": name,
                 "description": existing,
             }
+
         new = external_call(name)
         _set_in_cache(name, new["description"])
         return new

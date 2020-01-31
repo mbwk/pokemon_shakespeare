@@ -1,6 +1,8 @@
 import unittest
 from unittest import mock
 
+mock.patch("pokemon_shakespeare.caching.cache_translation", lambda x: x).start()
+
 from pokemon_shakespeare.exceptions import RatelimitedError
 from pokemon_shakespeare.service import (
     get_pokemon,

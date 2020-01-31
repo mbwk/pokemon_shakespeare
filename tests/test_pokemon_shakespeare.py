@@ -2,6 +2,8 @@ from unittest import mock
 
 from starlette.testclient import TestClient
 
+mock.patch("pokemon_shakespeare.caching.cache_translation", lambda x: x).start()
+
 from pokemon_shakespeare import __version__
 from pokemon_shakespeare.exceptions import (
     PokemonNotFoundError,

@@ -1,6 +1,7 @@
 from urllib.parse import urljoin
 
 
+from pokemon_shakespeare.caching import cache_translation
 from pokemon_shakespeare.exceptions import (
     PokemonNotFoundError,
     RatelimitedError,
@@ -51,6 +52,7 @@ def translate_text(text: str) -> str:
     return str(resjson["contents"]["translated"])
 
 
+@cache_translation
 def shakespearean_pokemon(name: str) -> dict:
     pokemon = get_pokemon(name)
     pokemon["description"] = translate_text(pokemon["description"])

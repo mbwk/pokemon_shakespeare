@@ -4,3 +4,7 @@ class PokemonNotFoundError(Exception):
 
 class RatelimitedError(Exception):
     pass
+
+
+class CacheError(Exception):
+    pass
