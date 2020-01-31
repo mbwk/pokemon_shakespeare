@@ -1,7 +1,10 @@
 from urllib.parse import urljoin
 
 
-from pokemon_shakespeare.exceptions import PokemonNotFoundError
+from pokemon_shakespeare.exceptions import (
+    PokemonNotFoundError,
+    RatelimitedError,
+)
 
 
 import requests
@@ -37,6 +40,8 @@ SHAKESPEARE_ENDPOINT = urljoin(FUNTRANSLATIONS_BASE, "shakespeare.json")
 
 def _get_funtranslations_shakespearean(text: str) -> dict:
     response = requests.post(SHAKESPEARE_ENDPOINT, data={"text": text})
+    if response.status_code == 429:
+        raise RatelimitedError
     return dict(response.json())
 
 
