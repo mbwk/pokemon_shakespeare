@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 
+import pokemon_shakespeare
 from pokemon_shakespeare.exceptions import (
     PokemonNotFoundError,
     RatelimitedError,
@@ -15,7 +16,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root() -> str:
-    return "Hello, world!"
+    return "Pokemon Shakespeare API v{}".format(pokemon_shakespeare.__version__)
 
 
 @app.get("/pokemon/{pokemon}")
